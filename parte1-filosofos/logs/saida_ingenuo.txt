@@ -1,0 +1,39 @@
+Jantar dos Filósofos - VERSÃO INGÊNUA (N = 5)
+Todos pegam primeiro o garfo da ESQUERDA e depois o da DIREITA.
+
+[  0.242s] P4 COM FOME  
+[  0.242s] P4   pegou G3
+[  0.406s] P2 COM FOME  
+[  0.406s] P2   pegou G1
+[  0.531s] P1 COM FOME  
+[  0.531s] P1   pegou G0
+[  0.553s] P3 COM FOME  
+[  0.553s] P3   pegou G2
+[  0.772s] P0 COM FOME  
+[  0.773s] P0   pegou G4
+
+================================================================
+DEADLOCK! Nenhum filósofo progrediu nos últimos 3s.
+================================================================
+  P0 está com fome, segura G4 e espera G0, que está com P1
+  P1 está com fome, segura G0 e espera G1, que está com P2
+  P2 está com fome, segura G1 e espera G2, que está com P3
+  P3 está com fome, segura G2 e espera G3, que está com P4
+  P4 está com fome, segura G3 e espera G4, que está com P0
+
+  Espera circular: P0 -> P1 -> P2 -> P3 -> P4 -> P0
+
+  As 4 condições de Coffman estão presentes ao mesmo tempo:
+   1. Exclusão mútua:  cada garfo só fica com um filósofo por vez
+   2. Manter-e-esperar: cada um segura um garfo enquanto espera o outro
+   3. Não preempção:   ninguém tira o garfo da mão do outro
+   4. Espera circular: o ciclo acima
+
+  Threads vivas (threading.enumerate()):
+   - MainThread
+   - Filosofo-0
+   - Filosofo-1
+   - Filosofo-2
+   - Filosofo-3
+   - Filosofo-4
+================================================================

@@ -1,0 +1,306 @@
+Jantar dos Filósofos - VERSÃO CORRIGIDA: hierarquia de recursos (N = 5)
+Ordem de aquisição de cada filósofo (menor número primeiro):
+  P0: G0 -> G4  <- inverteu a ordem
+  P1: G0 -> G1
+  P2: G1 -> G2
+  P3: G2 -> G3
+  P4: G3 -> G4
+
+[  0.473s] P3 COM FOME
+[  0.473s] P3   pegou G2
+[  0.574s] P3   pegou G3
+[  0.574s] P3 COMENDO   (esperou 0.10s)
+[  0.629s] P0 COM FOME
+[  0.629s] P0   pegou G0
+[  0.728s] P1 COM FOME
+[  0.729s] P0   pegou G4
+[  0.729s] P0 COMENDO   (esperou 0.10s)
+[  0.737s] P4 COM FOME
+[  0.779s] P2 COM FOME
+[  0.779s] P2   pegou G1
+[  1.001s] P0 PENSANDO  (soltou G4 e G0)
+[  1.001s] P1   pegou G0
+[  1.024s] P3 PENSANDO  (soltou G3 e G2)
+[  1.024s] P4   pegou G3
+[  1.024s] P2   pegou G2
+[  1.024s] P2 COMENDO   (esperou 0.24s)
+[  1.124s] P4   pegou G4
+[  1.124s] P4 COMENDO   (esperou 0.39s)
+[  1.362s] P3 COM FOME
+[  1.571s] P2 PENSANDO  (soltou G2 e G1)
+[  1.571s] P1   pegou G1
+[  1.571s] P1 COMENDO   (esperou 0.84s)
+[  1.572s] P3   pegou G2
+[  1.637s] P4 PENSANDO  (soltou G4 e G3)
+[  1.672s] P3   pegou G3
+[  1.672s] P3 COMENDO   (esperou 0.31s)
+[  1.970s] P2 COM FOME
+[  1.983s] P0 COM FOME
+[  2.170s] P1 PENSANDO  (soltou G1 e G0)
+[  2.170s] P2   pegou G1
+[  2.170s] P0   pegou G0
+[  2.259s] P3 PENSANDO  (soltou G3 e G2)
+[  2.270s] P0   pegou G4
+[  2.270s] P0 COMENDO   (esperou 0.29s)
+[  2.270s] P2   pegou G2
+[  2.270s] P2 COMENDO   (esperou 0.30s)
+[  2.460s] P1 COM FOME
+[  2.572s] P4 COM FOME
+[  2.572s] P4   pegou G3
+[  2.624s] P0 PENSANDO  (soltou G4 e G0)
+[  2.624s] P1   pegou G0
+[  2.672s] P4   pegou G4
+[  2.672s] P4 COMENDO   (esperou 0.10s)
+[  2.706s] P2 PENSANDO  (soltou G2 e G1)
+[  2.724s] P1   pegou G1
+[  2.724s] P1 COMENDO   (esperou 0.26s)
+[  2.967s] P1 PENSANDO  (soltou G1 e G0)
+[  3.002s] P4 PENSANDO  (soltou G4 e G3)
+[  3.006s] P3 COM FOME
+[  3.006s] P3   pegou G2
+[  3.107s] P3   pegou G3
+[  3.107s] P3 COMENDO   (esperou 0.10s)
+[  3.271s] P2 COM FOME
+[  3.271s] P2   pegou G1
+[  3.319s] P0 COM FOME
+[  3.319s] P0   pegou G0
+[  3.419s] P0   pegou G4
+[  3.419s] P0 COMENDO   (esperou 0.10s)
+[  3.683s] P3 PENSANDO  (soltou G3 e G2)
+[  3.683s] P2   pegou G2
+[  3.683s] P2 COMENDO   (esperou 0.41s)
+[  3.771s] P1 COM FOME
+[  3.834s] P4 COM FOME
+[  3.834s] P4   pegou G3
+[  3.944s] P0 PENSANDO  (soltou G4 e G0)
+[  3.944s] P1   pegou G0
+[  3.945s] P4   pegou G4
+[  3.945s] P4 COMENDO   (esperou 0.11s)
+[  4.046s] P3 COM FOME
+[  4.154s] P2 PENSANDO  (soltou G2 e G1)
+[  4.154s] P1   pegou G1
+[  4.154s] P1 COMENDO   (esperou 0.38s)
+[  4.154s] P3   pegou G2
+[  4.219s] P4 PENSANDO  (soltou G4 e G3)
+[  4.255s] P3   pegou G3
+[  4.255s] P3 COMENDO   (esperou 0.21s)
+[  4.561s] P1 PENSANDO  (soltou G1 e G0)
+[  4.593s] P0 COM FOME
+[  4.593s] P0   pegou G0
+[  4.654s] P2 COM FOME
+[  4.654s] P2   pegou G1
+[  4.693s] P0   pegou G4
+[  4.693s] P0 COMENDO   (esperou 0.10s)
+[  4.798s] P1 COM FOME
+[  4.828s] P3 PENSANDO  (soltou G3 e G2)
+[  4.828s] P2   pegou G2
+[  4.828s] P2 COMENDO   (esperou 0.17s)
+[  5.083s] P2 PENSANDO  (soltou G2 e G1)
+[  5.117s] P4 COM FOME
+[  5.117s] P4   pegou G3
+[  5.273s] P0 PENSANDO  (soltou G4 e G0)
+[  5.274s] P1   pegou G0
+[  5.274s] P4   pegou G4
+[  5.274s] P4 COMENDO   (esperou 0.16s)
+[  5.374s] P1   pegou G1
+[  5.374s] P1 COMENDO   (esperou 0.58s)
+[  5.633s] P4 PENSANDO  (soltou G4 e G3)
+[  5.652s] P3 COM FOME
+[  5.652s] P3   pegou G2
+[  5.706s] P1 PENSANDO  (soltou G1 e G0)
+[  5.752s] P3   pegou G3
+[  5.752s] P3 COMENDO   (esperou 0.10s)
+[  6.046s] P2 COM FOME
+[  6.046s] P2   pegou G1
+[  6.050s] P4 COM FOME
+[  6.154s] P0 COM FOME
+[  6.155s] P0   pegou G0
+[  6.191s] P3 PENSANDO  (soltou G3 e G2)
+[  6.191s] P4   pegou G3
+[  6.191s] P2   pegou G2
+[  6.191s] P2 COMENDO   (esperou 0.15s)
+[  6.255s] P0   pegou G4
+[  6.255s] P0 COMENDO   (esperou 0.10s)
+[  6.505s] P3 COM FOME
+[  6.525s] P2 PENSANDO  (soltou G2 e G1)
+[  6.525s] P3   pegou G2
+[  6.693s] P1 COM FOME
+[  6.825s] P0 PENSANDO  (soltou G4 e G0)
+[  6.825s] P4   pegou G4
+[  6.825s] P4 COMENDO   (esperou 0.78s)
+[  6.825s] P1   pegou G0
+[  6.925s] P1   pegou G1
+[  6.926s] P1 COMENDO   (esperou 0.23s)
+[  7.139s] P2 COM FOME
+[  7.141s] P1 PENSANDO  (soltou G1 e G0)
+[  7.141s] P2   pegou G1
+[  7.226s] P4 PENSANDO  (soltou G4 e G3)
+[  7.227s] P3   pegou G3
+[  7.227s] P3 COMENDO   (esperou 0.72s)
+[  7.582s] P0 COM FOME
+[  7.582s] P0   pegou G0
+[  7.682s] P0   pegou G4
+[  7.682s] P0 COMENDO   (esperou 0.10s)
+[  7.819s] P3 PENSANDO  (soltou G3 e G2)
+[  7.819s] P2   pegou G2
+[  7.819s] P2 COMENDO   (esperou 0.68s)
+[  7.977s] P0 PENSANDO  (soltou G4 e G0)
+[  8.019s] P4 COM FOME
+[  8.019s] P4   pegou G3
+[  8.059s] P1 COM FOME
+[  8.059s] P1   pegou G0
+[  8.120s] P4   pegou G4
+[  8.120s] P4 COMENDO   (esperou 0.10s)
+[  8.175s] P2 PENSANDO  (soltou G2 e G1)
+[  8.175s] P1   pegou G1
+[  8.175s] P1 COMENDO   (esperou 0.12s)
+[  8.479s] P1 PENSANDO  (soltou G1 e G0)
+[  8.576s] P0 COM FOME
+[  8.576s] P0   pegou G0
+[  8.650s] P4 PENSANDO  (soltou G4 e G3)
+[  8.676s] P0   pegou G4
+[  8.676s] P0 COMENDO   (esperou 0.10s)
+[  8.744s] P2 COM FOME
+[  8.745s] P2   pegou G1
+[  8.752s] P3 COM FOME
+[  8.752s] P3   pegou G2
+[  8.852s] P3   pegou G3
+[  8.852s] P3 COMENDO   (esperou 0.10s)
+[  8.940s] P0 PENSANDO  (soltou G4 e G0)
+[  8.987s] P4 COM FOME
+[  9.197s] P1 COM FOME
+[  9.197s] P1   pegou G0
+[  9.386s] P3 PENSANDO  (soltou G3 e G2)
+[  9.386s] P2   pegou G2
+[  9.386s] P2 COMENDO   (esperou 0.64s)
+[  9.386s] P4   pegou G3
+[  9.434s] P0 COM FOME
+[  9.486s] P4   pegou G4
+[  9.486s] P4 COMENDO   (esperou 0.50s)
+[  9.630s] P3 COM FOME
+[  9.771s] P2 PENSANDO  (soltou G2 e G1)
+[  9.771s] P3   pegou G2
+[  9.771s] P1   pegou G1
+[  9.771s] P1 COMENDO   (esperou 0.57s)
+[ 10.086s] P4 PENSANDO  (soltou G4 e G3)
+[ 10.086s] P3   pegou G3
+[ 10.086s] P3 COMENDO   (esperou 0.46s)
+[ 10.106s] P1 PENSANDO  (soltou G1 e G0)
+[ 10.106s] P0   pegou G0
+[ 10.170s] P2 COM FOME
+[ 10.170s] P2   pegou G1
+[ 10.206s] P0   pegou G4
+[ 10.206s] P0 COMENDO   (esperou 0.77s)
+[ 10.582s] P0 PENSANDO  (soltou G4 e G0)
+[ 10.614s] P3 PENSANDO  (soltou G3 e G2)
+[ 10.614s] P2   pegou G2
+[ 10.614s] P2 COMENDO   (esperou 0.44s)
+[ 10.782s] P4 COM FOME
+[ 10.782s] P4   pegou G3
+[ 10.882s] P4   pegou G4
+[ 10.882s] P4 COMENDO   (esperou 0.10s)
+[ 11.060s] P1 COM FOME
+[ 11.060s] P1   pegou G0
+[ 11.101s] P2 PENSANDO  (soltou G2 e G1)
+[ 11.151s] P3 COM FOME
+[ 11.151s] P3   pegou G2
+[ 11.161s] P1   pegou G1
+[ 11.161s] P1 COMENDO   (esperou 0.10s)
+[ 11.377s] P0 COM FOME
+[ 11.463s] P4 PENSANDO  (soltou G4 e G3)
+[ 11.463s] P3   pegou G3
+[ 11.464s] P3 COMENDO   (esperou 0.31s)
+[ 11.734s] P1 PENSANDO  (soltou G1 e G0)
+[ 11.734s] P0   pegou G0
+[ 11.791s] P2 COM FOME
+[ 11.791s] P2   pegou G1
+[ 11.834s] P0   pegou G4
+[ 11.834s] P0 COMENDO   (esperou 0.46s)
+[ 11.860s] P3 PENSANDO  (soltou G3 e G2)
+[ 11.892s] P2   pegou G2
+[ 11.892s] P2 COMENDO   (esperou 0.10s)
+[ 12.114s] P4 COM FOME
+[ 12.114s] P4   pegou G3
+[ 12.197s] P1 COM FOME
+[ 12.231s] P2 PENSANDO  (soltou G2 e G1)
+[ 12.292s] P0 PENSANDO  (soltou G4 e G0)
+[ 12.292s] P4   pegou G4
+[ 12.292s] P4 COMENDO   (esperou 0.18s)
+[ 12.292s] P1   pegou G0
+[ 12.306s] P3 COM FOME
+[ 12.306s] P3   pegou G2
+[ 12.392s] P1   pegou G1
+[ 12.392s] P1 COMENDO   (esperou 0.20s)
+[ 12.633s] P4 PENSANDO  (soltou G4 e G3)
+[ 12.633s] P3   pegou G3
+[ 12.633s] P3 COMENDO   (esperou 0.33s)
+[ 12.755s] P2 COM FOME
+[ 12.918s] P3 PENSANDO  (soltou G3 e G2)
+[ 12.919s] P4 COM FOME
+[ 12.919s] P4   pegou G3
+[ 12.939s] P1 PENSANDO  (soltou G1 e G0)
+[ 12.939s] P2   pegou G1
+[ 13.019s] P4   pegou G4
+[ 13.019s] P4 COMENDO   (esperou 0.10s)
+[ 13.039s] P2   pegou G2
+[ 13.039s] P2 COMENDO   (esperou 0.28s)
+[ 13.092s] P0 COM FOME
+[ 13.092s] P0   pegou G0
+[ 13.308s] P2 PENSANDO  (soltou G2 e G1)
+[ 13.359s] P4 PENSANDO  (soltou G4 e G3)
+[ 13.359s] P0   pegou G4
+[ 13.359s] P0 COMENDO   (esperou 0.27s)
+[ 13.444s] P1 COM FOME
+[ 13.791s] P3 COM FOME
+[ 13.791s] P3   pegou G2
+[ 13.828s] P0 PENSANDO  (soltou G4 e G0)
+[ 13.828s] P1   pegou G0
+[ 13.891s] P3   pegou G3
+[ 13.892s] P3 COMENDO   (esperou 0.10s)
+[ 13.900s] P4 COM FOME
+[ 13.928s] P1   pegou G1
+[ 13.928s] P1 COMENDO   (esperou 0.48s)
+[ 14.148s] P0 COM FOME
+[ 14.168s] P3 PENSANDO  (soltou G3 e G2)
+[ 14.168s] P4   pegou G3
+[ 14.268s] P4   pegou G4
+[ 14.268s] P4 COMENDO   (esperou 0.37s)
+[ 14.281s] P2 COM FOME
+[ 14.333s] P1 PENSANDO  (soltou G1 e G0)
+[ 14.333s] P2   pegou G1
+[ 14.334s] P0   pegou G0
+[ 14.430s] P3 COM FOME
+[ 14.430s] P3   pegou G2
+[ 14.731s] P1 COM FOME
+[ 14.751s] P4 PENSANDO  (soltou G4 e G3)
+[ 14.751s] P0   pegou G4
+[ 14.751s] P0 COMENDO   (esperou 0.60s)
+[ 14.751s] P3   pegou G3
+[ 14.751s] P3 COMENDO   (esperou 0.32s)
+[ 14.977s] P4 COM FOME
+[ 15.116s] P0 PENSANDO  (soltou G4 e G0)
+[ 15.117s] P1   pegou G0
+[ 15.190s] P3 PENSANDO  (soltou G3 e G2)
+[ 15.190s] P4   pegou G3
+[ 15.191s] P2   pegou G2
+[ 15.191s] P2 COMENDO   (esperou 0.91s)
+[ 15.291s] P4   pegou G4
+[ 15.291s] P4 COMENDO   (esperou 0.31s)
+[ 15.745s] P2 PENSANDO  (soltou G2 e G1)
+[ 15.745s] P1   pegou G1
+[ 15.745s] P1 COMENDO   (esperou 1.01s)
+[ 15.815s] P4 PENSANDO  (soltou G4 e G3)
+[ 15.962s] P1 PENSANDO  (soltou G1 e G0)
+
+==============================================
+RESUMO após 15s - o programa terminou: sem deadlock
+==============================================
+ Filósofo | Refeições | Maior espera
+    P0    |     11    |   0.77s
+    P1    |     11    |   1.01s
+    P2    |     11    |   0.91s
+    P3    |     12    |   0.72s
+    P4    |     12    |   0.78s
+
+ Total de refeições: 57
+ Mínimo/máximo por filósofo: 11/12 -> todos comeram (sem inanição)

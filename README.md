@@ -1,7 +1,7 @@
 # TDE — Programação Concorrente
 
-**Grupo:** ...
-**Integrantes:** Nome (@usuario), ...
+**Grupo:** 15
+**Integrantes:** Mateus Grabarski de Mantova, Grazielle Claus de Almeida, Mariana Cordeiro Calado Silva.
 **Linguagem:** Python 3.10+
 
 ## Como executar

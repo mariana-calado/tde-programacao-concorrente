@@ -179,4 +179,8 @@ Para um deadlock acontecer, as quatro condições devem ocorrer ao mesmo tempo:
 
 Com essa mudança dentro da versão corrigida, quebramos uma condição das 4 de Coffman, a Espera Circular, evitando um deadlock e escapando desse ciclo.
 
+Logs completos dentro da pasta `parte3-deadlock/logs/`.
+
 ## Vídeo
+
+https://youtu.be/AiYME7GanJA

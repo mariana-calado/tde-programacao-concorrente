@@ -1,0 +1,22 @@
+Deadlock - Versão sem Deadlock
+
+LOG COMPLETO:
+
+Thread 1: tentando adquirir o lock A
+Thread 1: em posse de lock A
+Thread 1: dormindo por 50ms
+Thread 2: tentando adquirir o lock A
+Thread 1: tentando adquirir o lock B
+Thread 1: em posse de lock B
+Thread 1: concluída
+Thread 1: liberando o lock B
+Thread 1: liberando o lock A
+Thread 2: em posse de lock A
+Thread 2: dormindo por 50ms
+Thread 2: tentando adquirir o lock B
+Thread 2: em posse de lock B
+Thread 2: concluída
+Thread 2: liberando o lock B
+Thread 2: liberando o lock A
+
+As duas threads conseguiram o que queriam, sem ter um travamento.

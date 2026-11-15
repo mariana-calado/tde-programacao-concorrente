@@ -1,0 +1,79 @@
+Deadlock - Versão com Deadlock
+
+LOG COMPLETO:
+
+Thread 1: tentando adquirir o lock A
+Thread 1: em posse do lock A
+Thread 1: dormindo por 50ms
+Thread 2: tentando adquirir o lock B
+Thread 2: em posse do lock B
+Thread 2: dormindo por 50ms
+Thread 2: acordou
+Thread 1: acordou
+Thread 1: tentando adquirir o lock B
+Thread 2: tentando adquirir o lock A
+Timeout (0:00:05)!
+Thread 0x00000a3c [Thread-2 (thread2)] (most recent call first):
+  File "d:...tde-programacao-concorrente\tde-programacao-concorrente\parte3-deadlock\deadlock.py", line 41 in thread2
+  File "C:...AppData\Roaming\uv\python\cpython-3.15-windows-x86_64-none\Lib\threading.py", line 1161 in run
+  File "C:...AppData\Roaming\uv\python\cpython-3.15-windows-x86_64-none\Lib\threading.py", line 1219 in _bootstrap_inner
+  File "C:...AppData\Roaming\uv\python\cpython-3.15-windows-x86_64-none\Lib\threading.py", line 1181 in _bootstrap
+
+Thread 0x00000584 [Thread-1 (thread1)] (most recent call first):
+  File "d:...tde-programacao-concorrente\tde-programacao-concorrente\parte3-deadlock\deadlock.py", line 19 in thread1
+  File "C:...AppData\Roaming\uv\python\cpython-3.15-windows-x86_64-none\Lib\threading.py", line 1161 in run
+  File "C:...AppData\Roaming\uv\python\cpython-3.15-windows-x86_64-none\Lib\threading.py", line 1219 in _bootstrap_inner
+  File "C:...AppData\Roaming\uv\python\cpython-3.15-windows-x86_64-none\Lib\threading.py", line 1181 in _bootstrap
+
+Thread 0x0000317c (most recent call first):
+  File "C:\Users\Nichu\AppData\Roaming\uv\python\cpython-3.15-windows-x86_64-none\Lib\threading.py", line 1270 in join
+  File "d:\projetos\tde-programacao-concorrente\tde-programacao-concorrente\parte3-deadlock\deadlock.py", line 62 in <module>
+PS D:\projetos\tde-programacao-concorrente\tde-programacao-concorrente\parte3-deadlock> 
+
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Observa-se que, com o diagnóstico aponta para as linhas 41 e 19 do código, essas linhas são:
+
+41 --> LOCK_A.acquire()
+
+19 --> LOCK_B.acquire()
+
+⍰ Mas por que esse erro?
+
+Imagine-se em uma determinada situação:
+
+👩 Eu tenho um garfo | 👤 Você tem uma colher  
+
+👩 Eu quero a colher | 👤 Você quer o garfo
+
+👩 ⚠︎ Eu não consigo liberar o garfo | 👤 ⚠︎ Você não consegue liberar a colher
+
+Isso gera um travamento, e foi isso que aconteceu durante a depuração do programa. Tanto a T1 quanto T2 não liberaram, um esperando
+pelo outro o tempo todo, dando um deadlock.
+
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+As Condições de Coffman
+
+São condições para a ocorrência do deadlock, tais são elas:
+
+    1. Exclusão mútua: Refere-se à necessidade de recursos que não podem ser compartilhados;
+
+    2. Retenção: Espera ocorrem quando um processo mantém pelo menos um recurso e espera adquirir recursos adicionais;
+
+    3. Não preempção: Significa que recursos não podem ser forçadamente removidos de um processo que os está segurando;
+
+    4. Espera circular: Acontece quando existe um conjunto de processos, cada um dos quais está esperando por um recurso 
+    que é mantido por outro processo no conjunto.
+
+Fonte: https://blog.grancursosonline.com.br/sistemas-operacionais-deadlock/
+
+Dentro do nosso código, todas as condições são atingidas ao mesmo tempo:
+
+    1. A T2 fica bloqueada no acquire() de um lock que a outra segura;
+
+    2. A T1 segura A enquanto espera B. A T2 segura B enquanto espera A;
+
+    3. Só a thread dona do lock pode liberá-lo, chamando release();
+
+    4. T1 espera B (da T2), que espera A (da T1).

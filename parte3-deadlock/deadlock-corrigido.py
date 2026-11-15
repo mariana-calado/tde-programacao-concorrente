@@ -34,21 +34,3 @@ if __name__ == "__main__":
 
     thread1.join()
     thread2.join()
-
-
-# 2 threads uma única função e uma main
-
-# Exercício 3.B
-
-# Regra global: sempre adquirir LOCK_A antes de LOCK_B,
-# em TODAS as threads.
-# Thread 1 e Thread 2:
-# adquirir(LOCK_A)
-# adquirir(LOCK_B)
-# // secao critica
-# liberar(LOCK_B)
-# liberar(LOCK_A)
-
-# T1 fica com ambos locks, T2 fica esperando T1 liberar LOCK_A. T1 libera ambos, e T2 pega o A e o B
-
-# colocar cores, está dificil de diferenciar as pritns

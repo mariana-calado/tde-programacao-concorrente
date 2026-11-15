@@ -62,6 +62,81 @@ Depois de comer, o filósofo solta os garfos e vai pensar. Enquanto isso, o vizi
 Logs completos em `parte1-filosofos/logs/`.
 
 ## Parte 2 — Threads e semáforos
+
+```bash
+cd parte2-semaforo
+python SemSincronizacao.py   # sem sincronização: perde incrementos Versão 1
+python ComSemaforo.py        # com semáforo binário: valor correto Versão 2
+```
+
+Parâmetros: **T = 8** threads, **M = 200.000** incrementos por thread, valor esperado **T × M = 1.600.000**. Usando apenas a biblioteca padrão (`threading`, `time`, `sys`).
+
+### O problema
+
+T threads incrementam um contador global `count`, M vezes cada. Na Versão 1 não há proteção, na Versão 2 a seção crítica é protegida por um semáforo binário (`threading.Semaphore(1)`). O corpo do incremento é idêntico nas duas versões, então a única diferença é o `acquire()`/`release()`.
+
+Para a corrida ficar reproduzível no CPython, o incremento foi separado em três passos (ler, somar, escrever), com a soma em uma função `incrementa()`, e o intervalo de troca de threads foi reduzido com `sys.setswitchinterval(1e-6)`. Isso não cria o problema, apenas o torna visível. Com o GIL, uma soma simples quase nunca é interrompida no meio. As duas versões usam a mesma configuração, para a comparação de tempo ser justa.
+
+### Resultados
+
+| Versão | Execução | Esperado | Obtido | Tempo (s) | Resultado |
+|---|---|---|---|---|---|
+| 1 – sem sincronização | 1 | 1.600.000 | 423,923 | 3.837 | PERDEU 1.176.077 |
+| 1 – sem sincronização | 2 | 1.600.000 | 422,195 | 4.379 | PERDEU 1,177,805 |
+| 1 – sem sincronização | 3 | 1.600.000 | 419,950 | 4.059 | PERDEU 1,180,050 |
+| 2 – semáforo binário | 1 | 1.600.000 | 1.600.000 | 44.140 | CORRETO |
+| 2 – semáforo binário | 2 | 1.600.000 | 1.600.000 | 41.881 | CORRETO |
+| 2 – semáforo binário | 3 | 1.600.000 | 1.600.000 | 43.412 | CORRETO |
+
+Logs de execução:
+
+```
+[Versão 1 - sem sincronização] T = 8, M = 200,000
+esperado = 1,600,000 | obtido = 423,923 | tempo = 3.837 s
+PERDEU 1,176,077 incrementos
+```
+
+```
+[Versão 2 - semáforo binário] T = 8, M = 200,000
+esperado = 1,600,000 | obtido = 1,600,000 | tempo = 44.140 s
+CORRETO
+```
+
+### Por que a versão sem sincronização perde incrementos
+
+`count = count + 1` parece uma operação só, mas são três passos: **ler** o valor, **somar** 1 e **escrever** o resultado. Se duas threads leem o mesmo valor antes de qualquer uma escrever, as duas calculam o mesmo resultado e a segunda escrita sobrescreve a primeira, então um incremento se perde (*lost update*). O trecho que lê e escreve o contador é uma **seção crítica** que não é atômica, e como o escalonador decide quando trocar de thread, o resultado muda a cada execução, algo que é típico de uma condição de corrida.
+
+### Por que a versão com semáforo é correta
+
+O semáforo foi criado com uma única permissão, então funciona como semáforo binário. Só a thread que conseguiu o `acquire()` executa a seção crítica, e as outras bloqueiam até o `release()`. Isso garante **exclusão mútua**, ou seja, os passos ler, somar e escrever de uma thread nunca se intercalam com os de outra, e o resultado é sempre T × M. O `release()` fica em um bloco `finally`, para a permissão ser devolvida mesmo se ocorrer uma exceção. Sem isso, as outras threads ficariam bloqueadas para sempre.
+
+### Trade-off de throughput
+
+A Versão 2 levou cerca de 11×(em média) o tempo da Versão 1 (44s contra 3,8s). A Versão 1 é mais rápida, mas o resultado está errado. O custo da Versão 2 vem de duas fontes:
+
+- cada incremento paga `acquire()` e `release()`, num total de 1,6 milhão de aquisições;
+- as 8 threads disputam um único recurso, então há contenção, a thread que não consegue a permissão bloqueia e precisa ser acordada pelo sistema operacional, e essa troca de contexto domina o tempo porque a seção crítica é muito pequena.
+
+O tempo absoluto e a proporção entre as versões dependem da máquina, do sistema operacional e da versão do Python.”
+
+### Justiça (fairness)
+
+O `threading.Semaphore` do Python mantém uma fila de threads bloqueadas e, na prática, acorda em ordem de chegada, o que evita inanição. Justiça tem custo: mais trocas de contexto e menos throughput. Sem ela, uma thread que acabou de liberar poderia readquirir logo em seguida. Isso costuma ser mais rápido, mas pode deixar outras threads esperando indefinidamente. A documentação não promete essa ordem, então a justiça não é formal.
+
+### Visibilidade e ordenação
+
+Existem dois problemas distintos em memória compartilhada:
+- **Atomicidade:** É o lost update descrito acima, que é resolvido pela exclusão mútua.
+- **Visibilidade e ordenação:** É saber se a escrita de uma thread fica visível para as outras e em que ordem. Sem sincronização, o compilador, o interpretador e a CPU podem reordenar ou atrasar escritas, e nada garante que outra thread veja o valor atualizado.
+
+No Java, o modelo de memória define a relação **happens-before**: o `release()` de um semáforo (ou o `unlock()` de um lock) acontece antes do `acquire()` seguinte, então tudo que a primeira thread escreveu na seção crítica fica visível para a próxima.
+
+E em CPython, o efeito prático é o mesmo, por **barreiras implícitas**. O GIL garante que só uma thread execute bytecode por vez e é liberado e readquirido nas trocas de thread, o que funciona como barreira. Além disso, as primitivas de `threading` (`Lock`, `Semaphore`) fazem `release()` publicar as escritas e `acquire()` enxergá-las. Isso esconde boa parte do problema de visibilidade, mas é um detalhe da implementação CPython e não uma garantia da linguagem. Em builds sem GIL, a sincronização explícita passa a ser indispensável. O semáforo continua sendo o que torna o programa correto em qualquer cenário.
+
+### Intervalo das trocas
+
+Ao remover `sys.setswitchinterval(1e-6)` e usar o intervalo padrão do CPython (5 ms), a Versão 1 não perdeu incrementos(o valor obtido foi 1.600.000), e os tempos caíram para 0,15 s (Versão 1) e 2 s (Versão 2). Com esse intervalo, as threads quase nunca são interrompidas no meio do incremento, então a condição de corrida existe, mas raramente se manifesta. Por isso o sys.setswitchinterval(1e-6) foi mantido na demonstração: ele força trocas de thread frequentes e expõe a corrida, ao custo de tempos bem maiores. Isso mostra que a ausência de erro em uma execução não prova que o código está correto. Sem sincronização, o programa continua incorreto, ou seja, ele não garante o resultado mesmo quando acerta.
+
 ## Parte 3 — Deadlock
 
 ### Como executar

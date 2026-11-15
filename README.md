@@ -4,6 +4,10 @@
 **Integrantes:** Mateus Grabarski de Mantova, Grazielle Claus de Almeida, Mariana Cordeiro Calado Silva.
 **Linguagem:** Python 3.10+
 
+## Vídeo
+
+https://youtu.be/AiYME7GanJA
+
 ## Como executar
 
 ## Parte 1 — Jantar dos Filósofos
@@ -133,7 +137,7 @@ No Java, o modelo de memória define a relação **happens-before**: o `release(
 
 E em CPython, o efeito prático é o mesmo, por **barreiras implícitas**. O GIL garante que só uma thread execute bytecode por vez e é liberado e readquirido nas trocas de thread, o que funciona como barreira. Além disso, as primitivas de `threading` (`Lock`, `Semaphore`) fazem `release()` publicar as escritas e `acquire()` enxergá-las. Isso esconde boa parte do problema de visibilidade, mas é um detalhe da implementação CPython e não uma garantia da linguagem. Em builds sem GIL, a sincronização explícita passa a ser indispensável. O semáforo continua sendo o que torna o programa correto em qualquer cenário.
 
-### Intervalo das trocas
+###  Obs. Intervalo das trocas
 
 Ao remover `sys.setswitchinterval(1e-6)` e usar o intervalo padrão do CPython (5 ms), a Versão 1 não perdeu incrementos(o valor obtido foi 1.600.000), e os tempos caíram para 0,15 s (Versão 1) e 2 s (Versão 2). Com esse intervalo, as threads quase nunca são interrompidas no meio do incremento, então a condição de corrida existe, mas raramente se manifesta. Por isso o sys.setswitchinterval(1e-6) foi mantido na demonstração: ele força trocas de thread frequentes e expõe a corrida, ao custo de tempos bem maiores. Isso mostra que a ausência de erro em uma execução não prova que o código está correto. Sem sincronização, o programa continua incorreto, ou seja, ele não garante o resultado mesmo quando acerta.
 
@@ -180,7 +184,3 @@ Para um deadlock acontecer, as quatro condições devem ocorrer ao mesmo tempo:
 Com essa mudança dentro da versão corrigida, quebramos uma condição das 4 de Coffman, a Espera Circular, evitando um deadlock e escapando desse ciclo.
 
 Logs completos dentro da pasta `parte3-deadlock/logs/`.
-
-## Vídeo
-
-https://youtu.be/AiYME7GanJA
